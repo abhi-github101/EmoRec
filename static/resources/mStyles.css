@@ -1,0 +1,46 @@
+.affix{
+top:0px;
+width:100%;
+}
+#header_div{
+height:120px;
+}
+#start_div{
+
+background-color:#fff;
+height:350px;
+box-shadow:1px 1px 1px;
+border-style:solid;
+border-width:0.5px;
+border-color:#eee}
+
+#emotion_div{
+background-color:#fff;
+height:410px;
+box-shadow:1px 1px 1px;
+border-style:solid;
+border-width:0.5px;
+border-color:#eee
+}
+
+#analysis_div{
+background-color:#fff;
+height:1290px;
+box-shadow:1px 1px 1px;
+border-style:solid;
+border-width:0.5px;
+border-color:#eee
+}
+#overall_div{
+background-color:#fff;
+height:640px;
+box-shadow:1px 1px 1px;
+border-style:solid;
+border-width:0.5px;
+border-color:#eee
+}
+#footer_div{
+background-color:#fff;
+height:200px;
+margin-top:50px;
+}
