@@ -1,430 +1,77 @@
-<!DOCTYPE html>
-<html >
-<head>
-<!--<meta name="viewport" content="width=device-width;initial-scale=1">-->
-<title>
-Emotion Recognition
-</title>
-<!--<script src="static/resources/sample.js" ></script>-->
-<!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
--->
-
-<link rel="stylesheet" href="static/resources/styles.css">
-<link rel="stylesheet" href="static/resources/bootstrap/css/bootstrap.css" >
-<link rel="stylesheet" href="static/resources/bootstrap/css/bootstrap.min.css" >
-
-<script src="static/resources/charts/loader.js" ></script>
-<!--[if IE]><script src="static/resources/excanvas.js"></script><![endif]-->
-<script src="static/resources/bar-graph.js"></script>
-
-<script src="static/resources/scripts.js" ></script>
-<script src="static/resources/wave.js" ></script>
-<script src="static/resources/circularProgress.js" ></script>
-<script src="static/resources/emoticons.js" ></script>
-<script src="static/resources/charts.js" ></script>
-<script src="static/resources/jquery.js" ></script>
-<script src="static/resources/jquery.min.js" ></script>
-<script src="static/resources/bootstrap/js/bootstrap.js" ></script>
-<script src="static/resources/bootstrap/js/bootstrap.min.js" ></script>
-
-<style>
-a{color:#000;text-decoration:none;}
-a:hover{background-color:#eee;text-decoration:none;}
-
-canvas {
-    display: block;
-}
-</style>
-<!--#F44336-->
-</head>
-
-<body style="position:relative;background-color:#fff" data-spy="scroll" data-target="#navList" data-offset="150" onload="startScript()">
-
-<!-- Main Division-->
-<div id="main_div" class="container-fluid" style="background-color:#fff" >
-<div class="row">
-
-<!-- Side Division-->
-<div id="side_div" class="col-md-2"  >
-<div class="list_div" data-spy="affix" data-offset-top="0px" style="width:220px;height:630px;margin-top:10px;border-style:solid;border-width:0px;border-right-width:1px;border-color:#eee">
-<span class="" style="padding:10px;margin-top:10px;font-size:30px;font-family:Andalus" data-toggle="popover" data-trigger="hover" data-delay='{"show":300,"hide":100}' data-placement="bottom" data-content="Emotion Recognition through Voice">EmoRec 3.0</span>
-<div id="navList" >
-<ul id="" class="nav nav-pills nav-stacked" role="tablist" style="margin-top:20px;font-family:Andalus">
-<li role="presentation" style="padding:0px;" data-toggle="popover" data-trigger="hover" data-delay='{"show":300,"hide":100}' data-placement="bottom" data-content="Navigate to Start">
-<a class="anchors" href="#startLabel" style="padding:20px;" onclick="">START</a></li>
-<hr style="padding:0px;margin:0px">
-<li role="presentation" style="padding:0px" data-toggle="popover" data-trigger="hover" data-delay='{"show":300,"hide":100}' data-placement="bottom" data-content="Navigate to Emotion">
-<a class="anchors" href="#emotionLabel" style="padding:20px;" onclick="">EMOTION</a></li>
-<hr style="padding:0px;margin:0px">
-<li role="presentation" style="padding:0px" data-toggle="popover" data-trigger="hover" data-delay='{"show":300,"hide":100}' data-placement="bottom" data-content="Navigate to Analysis">
-<a class="anchors" href="#analysisLabel" style="padding:20px;" onclick="">ANALYSIS</a></li>
-<hr style="padding:0px;margin:0px">
-<li role="presentation" style="padding:0px" data-toggle="popover" data-trigger="hover" data-delay='{"show":300,"hide":100}' data-placement="bottom" data-content="Navigate to Overall Emotion">
-<a class="anchors" href="#overallLabel" style="padding:20px;" onclick="">OVERALL EMOTION</a></li>
-<hr style="padding:0px;margin:0px">
-<li class="no-spy" role="presentation" style="padding:0px"  data-toggle="popover" data-delay='{"show":300,"hide":100}' data-trigger="hover" data-placement="bottom" data-content="Table Representation of Emotion Analysis" >
-<a id="analyticsBtn" style="padding:20px;" onclick="">ANALYTICS</a> </li>
-<hr style="padding:0px;margin:0px">
-<li class="no-spy" role="presentation" style="padding:0px" data-toggle="popover" data-delay='{"show":300,"hide":100}' data-trigger="hover" data-placement="bottom" data-content="Check Network Status">
-<a id="netStatusBtn"  style="padding:20px;" onclick="">STATUS</a> </li>
-
-</ul>
-</div>
-<!--Analysis Completion Alert-->
-<div id="completionAlert" class="alert alert-info alert-dismissible fade in" role="alert" style="margin-top:0px">
-<button type="button" class="close" aria-label="Close" onclick="closeAlert1()">
-<span aria-hidden="true">&times;</span></button>
-<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><strong style="font-family:Andalus"> Analysis Completed !</strong><br>  
-<a class="anchors btn btn-info" style="margin-top:5px;margin-left:10px;font-family:Andalus" href="#overallLabel" >CHECK RESULTS</a>
-</div>
-<script>
-function closeAlert1(){
-$("#completionAlert").hide();
-}
-</script>
-<!--Network Error Alert>
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Emotion Recognition</title><link rel="stylesheet" href="static/resources/styles.min.css"><link rel="stylesheet" href="static/resources/bootstrap/css/bootstrap.min.css"><style>a{color:#000;text-decoration:none}a:hover{background-color:#eee;text-decoration:none}canvas{display:block}</style><!--#F44336--></head><body style="position:relative;background-color:#fff" data-spy="scroll" data-target="#navList" data-offset="150" onload="startScript()"><!-- Main Division--><div id="main_div" class="container-fluid" style="background-color:#fff"><div class="row"><!-- Side Division--><div id="side_div" class="col-md-2"><div class="list_div" data-spy="affix" data-offset-top="0px" style="width:220px;height:630px;margin-top:10px;border-style:solid;border-width:0;border-right-width:1px;border-color:#eee"><span class="" style="padding:10px;margin-top:10px;font-size:30px;font-family:Andalus" data-toggle="popover" data-trigger="hover" data-delay="{&#34;show&#34;:300,&#34;hide&#34;:100}" data-placement="bottom" data-content="Emotion Recognition through Voice">EmoRec 3.0</span><div id="navList"><ul id="" class="nav nav-pills nav-stacked" role="tablist" style="margin-top:20px;font-family:Andalus"><li role="presentation" style="padding:0" data-toggle="popover" data-trigger="hover" data-delay="{&#34;show&#34;:300,&#34;hide&#34;:100}" data-placement="bottom" data-content="Navigate to Start"><a class="anchors" href="#startLabel" style="padding:20px" onclick="">START</a></li><hr style="padding:0;margin:0"><li role="presentation" style="padding:0" data-toggle="popover" data-trigger="hover" data-delay="{&#34;show&#34;:300,&#34;hide&#34;:100}" data-placement="bottom" data-content="Navigate to Emotion"><a class="anchors" href="#emotionLabel" style="padding:20px" onclick="">EMOTION</a></li><hr style="padding:0;margin:0"><li role="presentation" style="padding:0" data-toggle="popover" data-trigger="hover" data-delay="{&#34;show&#34;:300,&#34;hide&#34;:100}" data-placement="bottom" data-content="Navigate to Analysis"><a class="anchors" href="#analysisLabel" style="padding:20px" onclick="">ANALYSIS</a></li><hr style="padding:0;margin:0"><li role="presentation" style="padding:0" data-toggle="popover" data-trigger="hover" data-delay="{&#34;show&#34;:300,&#34;hide&#34;:100}" data-placement="bottom" data-content="Navigate to Overall Emotion"><a class="anchors" href="#overallLabel" style="padding:20px" onclick="">OVERALL EMOTION</a></li><hr style="padding:0;margin:0"><li class="no-spy" role="presentation" style="padding:0" data-toggle="popover" data-delay="{&#34;show&#34;:300,&#34;hide&#34;:100}" data-trigger="hover" data-placement="bottom" data-content="Table Representation of Emotion Analysis"><a id="analyticsBtn" style="padding:20px" onclick="">ANALYTICS</a></li><hr style="padding:0;margin:0"><li class="no-spy" role="presentation" style="padding:0" data-toggle="popover" data-delay="{&#34;show&#34;:300,&#34;hide&#34;:100}" data-trigger="hover" data-placement="bottom" data-content="Check Network Status"><a id="netStatusBtn" style="padding:20px" onclick="">STATUS</a></li></ul></div><!--Analysis Completion Alert--><div id="completionAlert" class="alert alert-info alert-dismissible fade in" role="alert" style="margin-top:0"><button type="button" class="close" aria-label="Close" onclick="closeAlert1()"><span aria-hidden="true">&times;</span></button> <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><strong style="font-family:Andalus"> Analysis Completed !</strong><br><a class="anchors btn btn-info" style="margin-top:5px;margin-left:10px;font-family:Andalus" href="#overallLabel">CHECK RESULTS</a></div><!--Network Error Alert>
 <div id="errorAlert" class="alert alert-info alert-dismissible fade in" role="alert" style="margin-top:0px">
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 <span aria-hidden="true">&times;</span></button>
 <strong>Oops Snap!</strong><br>  
 Internal Server Error Occurred
 </div>
--->
-</div>
+--></div></div><!-- Content Division--><div id="content_div" class="col-md-10"><!-- Header Division--><div id="header_div" class="img-rounded" style="background:url(static/resources/head.png)"></div><!--Start Label--><div id="startLabel" style="position:relative;height:150px;margin:10px;margin-top:30px"><div style="position:absolute;top:10%;left:42%;font-family:Andalus">START</div><img class="center-block" height="150" width="51" src="static/resources/start_label.png" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Start Emotion Recognition"></div><!--Start Division--><div id="start_div" class="img-rounded" style="position:relative;z-index:0"><img id="mic_icon1" src="static/resources/record_ico_xx.png" class="img-circle" style="position:absolute;top:25%;box-shadow:1px 1px 1px;margin-left:50px;border-style:solid;border-width:.5px;border-color:#337ab7" onclick="startAnalysis()" data-delay="{&#34;show&#34;:300,&#34;hide&#34;:100}" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Start Emotion Recognition"> <button id="start_btn" type="button" class="btn btn-primary" style="position:absolute;top:40%;margin-left:180px" onclick="startAnalysis()">START</button> <img id="mic_icon2" src="static/resources/record_ico_xx.png" class="img-circle" style="position:absolute;top:25%;visibility:collapse;box-shadow:1px 1px 1px;margin-left:50px;border-style:solid;border-width:.5px;border-color:#d9534f" onclick="stopAnalysis()" data-delay="{&#34;show&#34;:300,&#34;hide&#34;:100}" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Stop Microphone"> <button id="stop_btn" type="button" class="btn btn-danger" style="visibility:collapse;position:absolute;top:40%;margin-left:180px" onclick="stopAnalysis()">STOP</button><div id="waveform_div" class="img-rounded" style="position:absolute;top:25%;left:300px;height:100px;right:50px;border-style:solid;border-width:.5px;border-color:#fff3e0;background-color:#eee"><canvas id="waveFormCanvas" height="98" width="740" style="padding:1px"></canvas></div></div><!-- Emotion Label--><div id="emotionLabel" style="position:relative;height:150px;margin:10px"><div style="position:absolute;top:58%;left:54%;font-family:Andalus">EMOTIONS</div><img class="center-block" height="150" width="51" src="static/resources/emotion_label.png" data-toggle="popover" data-trigger="hover" data-placement="left" data-content="Representing Emotions using Emoticons"></div><!--Emotion Division--><div id="emotion_div" class="img-rounded" style=""><div class="row"><div class="col-md-3" style="margin-top:50px"><img id="happyEmo" class="center-block" src="static/resources/happyC.jpg" style="border-radius:100px;height:100px;width:100px"> <span class="center-block" style="margin-top:50px;text-align:center;font-family:Andalus;font-size:20px">Happy</span></div><div class="col-md-3" style="margin-top:50px"><img id="sadEmo" class="center-block" src="static/resources/sadC.jpg" style="border-radius:100px;height:100px;width:100px"> <span class="center-block" style="margin-top:50px;text-align:center;font-family:Andalus;font-size:20px">Sad</span></div><div class="col-md-3" style="margin-top:50px"><img id="normalEmo" class="center-block" src="static/resources/normalC.jpg" style="border-radius:100px;height:100px;width:100px"> <span class="center-block" style="margin-top:50px;text-align:center;font-family:Andalus;font-size:20px">Normal</span></div><div class="col-md-3" style="margin-top:50px"><img id="angryEmo" class="center-block" src="static/resources/angryC.jpg" style="border-radius:100px;height:100px;width:100px"> <span class="center-block" style="margin-top:50px;text-align:center;font-family:Andalus;font-size:20px">Angry</span></div></div></div><!--Analysis Label--><div id="analysisLabel" style="position:relative;height:150px;margin:10px"><div style="position:absolute;top:45%;left:40%;font-family:Andalus">ANALYSIS</div><img class="center-block" height="150" width="51" src="static/resources/analysis_label.png" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Analysing Emotions"></div><!--Analysis Division--><div id="analysis_div" class="img-rounded"><div class="row"><div class="col-md-6"><canvas id="emotionCanvas" class="container-fluid" style="margin:25px;margin-left:77px"></canvas></div><div class="col-md-6"><div style="margin:10px;margin-top:30px;font-family:Andalus"><div class="row"><div class="col-md-1"><div style="height:20px;width:20px;background-color:#337ab7;border-radius:50px;box-shadow:1px 1px 1px"></div></div><div class="col-md-11">Happy</div></div></div><div style="margin:10px;font-family:Andalus"><div class="row"><div class="col-md-1"><div style="height:20px;width:20px;background-color:#ffab40;border-radius:50px;box-shadow:1px 1px 1px"></div></div><div class="col-md-11">Sad</div></div></div><div style="margin:10px;font-family:Andalus"><div class="row"><div class="col-md-1"><div style="height:20px;width:20px;background-color:#03a9f4;border-radius:50px;box-shadow:1px 1px 1px"></div></div><div class="col-md-11">Normal</div></div></div><div style="margin:10px;font-family:Andalus"><div class="row"><div class="col-md-1"><div style="height:20px;width:20px;background-color:#d32f2f;border-radius:50px;box-shadow:1px 1px 1px"></div></div><div class="col-md-11">Angry</div></div></div></div></div><hr style="margin-left:25px;margin-right:25px"><div id="happyChart" class="container-fluid" style="height:150px;margin-top:30px;margin-bottom:25px"></div><hr style="margin-left:25px;margin-right:25px"><div id="sadChart" class="container-fluid" style="height:150px;margin-top:30px;margin-bottom:25px"></div><hr style="margin-left:25px;margin-right:25px"><div id="normalChart" class="container-fluid" style="height:150px;margin-top:30px;margin-bottom:25px"></div><hr style="margin-left:25px;margin-right:25px"><div id="angryChart" class="container-fluid" style="height:150px;margin-top:30px;margin-bottom:25px"></div><hr style="margin-left:25px;margin-right:25px"><div id="overallChart" class="container-fluid" style="height:150px;margin-top:30px;margin-bottom:25px"></div></div><!-- Overall Label--><div id="overallLabel" style="position:relative;height:150px;margin:10px"><div style="position:absolute;top:25%;left:54%;font-family:Andalus">OVERALL EMOTIONS</div><img class="center-block" height="150" width="51" src="static/resources/overall_label.png" data-toggle="popover" data-trigger="hover" data-placement="left" data-content="Showing Results of Emotion Analysis"></div><!--Overall Division--><div id="overall_div" class="img-rounded" style="position:relative"><div class="row"><div class="col-md-3" style="margin-top:25px"><canvas class="container-fluid" id="overallHappyCanvas" width="200" height="200" style=""></canvas><span class="center-block" style="text-align:center;font-family:Andalus;font-size:23px">Happy</span></div><div class="col-md-3" style="margin-top:25px"><canvas class="container-fluid" id="overallSadCanvas" width="200" height="200" style=""></canvas><span class="center-block" style="text-align:center;font-family:Andalus;font-size:23px">Sad</span></div><div class="col-md-3" style="margin-top:25px"><canvas class="container-fluid" id="overallNormalCanvas" width="200" height="200" style=""></canvas><span class="center-block" style="text-align:center;font-family:Andalus;font-size:23px">Normal</span></div><div class="col-md-3" style="margin-top:25px"><canvas class="container-fluid" id="overallAngryCanvas" width="200" height="200" style=""></canvas><span class="center-block" style="text-align:center;font-family:Andalus;font-size:23px">Angry</span></div></div></div><!--Footer Division--><div id="footer_div" class="img-rounded" style="position:relative"></div><!-- Analytics Modal --><div id="analyticsModal" class="modal fade" role="dialog"><div class="modal-dialog" role="document"><!-- Modal content--><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title" style="font-family:Andalus;font-face:plain">EMOTION ANALYTICS</h4></div><div class="modal-body"><table id="dataTable" class="table table-striped" style=""></table></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div><!--Setting Modal --><div id="settingModal" class="modal fade" role="dialog"><div class="modal-dialog" role="document"><!-- Modal content--><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title" style="font-family:Andalus;font-face:plain">SETTINGS</h4></div><div class="modal-body" style="margin-top:10px;margin-bottom:30px"></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div><!-- Network Status Modal--><div id="netStatusModal" class="modal fade" role="dialog"><div class="modal-dialog" role="document"><!-- Modal content--><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title" style="font-family:Andalus;font-face:plain">STATUS</h4></div><div class="modal-body"><div style="padding-left:10px;padding-top:10px"><span style="font-family:Andalus">NETWORK STATUS</span></div><div style="padding:10px;margin-left:20px"><span style="font-family:Andalus">Network Delay:</span> <span id="netDelay" style="margin-left:20px;font-family:Andalus">NA</span></div><hr><div style="padding-left:10px;padding-top:10px"><span style="font-family:Andalus">ANALYSIS STATUS</span></div><div style="padding:10px;margin-left:20px"><span style="font-family:Andalus">Estimated Analysis Completion Time:</span> <span id="estimatedTime" style="margin-left:20px;font-family:Andalus">NA</span></div><div style="padding:10px;margin-left:20px"><span style="font-family:Andalus">Time Elapsed:</span> <span id="timeSpent" style="margin-left:20px;font-family:Andalus">NA</span></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div><!-- Analysis Warning Modal--><div id="warningModal" class="modal fade" role="dialog"><div class="modal-dialog" role="document"><!-- Modal content--><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h1 class="modal-title" style="font-size:18px;font-family:Andalus;font-face:plain;color:#d9534f">WARNING</h1></div><div class="modal-body"><div style="font-family:Andalus">Emotion Analysis is in Progress. Wait until completed.</div><div style="padding-top:10px;padding-bottom:10px"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span style="font-family:Andalus"> Reload to Start Analysis</span></div><div class="modal-footer"><!--		<button type="button" class="btn btn-default btn-danger" >Stop Analysis</button>
+    --> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div><script src="static/resources/jquery.min.js"></script><script src="static/resources/bootstrap/js/bootstrap.min.js"></script><script src="static/resources/charts/loader.min.js"></script><script src="static/resources/bar-graph.min.js"></script><script src="static/resources/scripts.min.js"></script><script src="static/resources/wave.min.js"></script><script src="static/resources/circularProgress.min.js"></script><script src="static/resources/emoticons.min.js"></script><script src="static/resources/charts.min.js"></script><script>//show analytics modal
+            $(document).ready(function () {
+              $("#analyticsBtn").click(function () {
+                $("#analyticsModal").modal();
+              });
+            });
+            //show setting modal
+            $(document).ready(function () {
+              $("#settingBtn").click(function () {
+                $("#settingModal").modal();
+              });
+            });
+            //show network status modal
+            $(document).ready(function () {
+              $("#netStatusBtn").click(function () {
+                $("#netStatusModal").modal();
+              });
+            });
 
-</div>
+            //this is for animating circular progress bar when reached at the bottom of window
+            $(window).on('scroll', function () {
+              var $window = $(window);
+              var window_height = $window.height();
+              var window_top_position = $window.scrollTop();
+              var window_bottom_position = (window_top_position + window_height);
+              var $animation_elements = $('#overall_div');
+              $.each($animation_elements, function () {
+                var $element = $(this);
+                var element_height = $element.outerHeight();
+                var element_top_position = $element.offset().top;
+                var element_bottom_position = (element_top_position + element_height);
 
-<!-- Content Division-->
-<div id="content_div" class="col-md-10" >
-<!-- Header Division-->
-<div id="header_div" class="img-rounded" style="background:url('static/resources/head.png')">
-</div>
-<!--Start Label-->
-<div id="startLabel" style="position:relative;height:150px;margin:10px;margin-top:30px">
-<div style="position:absolute;top:10%;left:42%;font-family:Andalus">START</div>
-<img class="center-block" height=150 width=51 src="static/resources/start_label.png" data-toggle="popover"  data-trigger="hover" data-placement="right" data-content="Start Emotion Recognition">
-</div>
-<!--Start Division-->
-<div id="start_div" class="img-rounded" style="position:relative;z-index:0">
-<img id="mic_icon1" src="static/resources/record_ico_xx.png" class="img-circle" style="position:absolute;top:25%;box-shadow:1px 1px 1px;margin-left:50px;border-style:solid;border-width:0.5px;border-color:#337ab7" onclick="startAnalysis()" data-delay='{"show":300,"hide":100}' data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Start Emotion Recognition">
-<button id="start_btn" type="button" class="btn btn-primary" style="position:absolute;top:40%;margin-left:180px;" onclick="startAnalysis()">START</button>
-<img id="mic_icon2" src="static/resources/record_ico_xx.png" class="img-circle" style="position:absolute;top:25%;visibility:collapse;box-shadow:1px 1px 1px;margin-left:50px;border-style:solid;border-width:0.5px;border-color:#d9534f" onclick="stopAnalysis()" data-delay='{"show":300,"hide":100}' data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Stop Microphone" >
-<button id="stop_btn" type="button" class="btn btn-danger" style="visibility:collapse;position:absolute;top:40%;margin-left:180px;" onclick="stopAnalysis()" >STOP</button>
+                //check to see if this current container is within viewport
+                if ((element_top_position >= window_top_position) &&
+                  (element_bottom_position + 50 == window_bottom_position) && (document.getElementById('stop_btn').style.visibility == "collapse") && (progressFlag == true)) {
+                  //clear canvases
+                  ctx3.clearRect(0, 0, overallHappyCanvas.width, overallHappyCanvas.height);
+                  ctx4.clearRect(0, 0, overallSadCanvas.width, overallSadCanvas.height);
+                  ctx5.clearRect(0, 0, overallNormalCanvas.width, overallNormalCanvas.height);
+                  ctx6.clearRect(0, 0, overallAngryCanvas.width, overallAngryCanvas.height);
+                  //start animation of circular progress bars
+                  circularProgress(overallHappyCanvas, ctx3, Math.round(happySum / sum * 100), '#337ab7');
+                  circularProgress(overallSadCanvas, ctx4, Math.round(sadSum / sum * 100), '#FFAB40');
+                  circularProgress(overallNormalCanvas, ctx5, Math.round(normalSum / sum * 100), '#03A9F4');
+                  circularProgress(overallAngryCanvas, ctx6, Math.round(angrySum / sum * 100), '#D32F2F');
+                  //console.log("Scroll Event--Element:"+element_bottom_position+"||Window:"+window_bottom_position+"||Hap;"+Math.round(happySum/sum*100));
 
-<div id="waveform_div" class="img-rounded" style="position:absolute;top:25%;left:300px;height:100px;right:50px;border-style:solid;border-width:0.5px;border-color:#fff3e0;background-color:#eee">
+                }
+              });
+            });
 
-<canvas id="waveFormCanvas" height=98 width=740 style="padding:1px"  ></canvas>
-</div>
-</div>
-<!-- Emotion Label-->
-<div id="emotionLabel" style="position:relative;height:150px;margin:10px;">
-<div style="position:absolute;top:58%;left:54%;font-family:Andalus">EMOTIONS</div>
-<img class="center-block" height=150 width=51 src="static/resources/emotion_label.png" data-toggle="popover" data-trigger="hover" data-placement="left" data-content="Representing Emotions using Emoticons">
-</div>
-<!--Emotion Division-->
-<div id="emotion_div" class="img-rounded" style="">
-<div class="row">
-<div class="col-md-3" style="margin-top:50px">
-<img id="happyEmo" class="center-block" src="static/resources/happyC.jpg"  style="border-radius:100px;height:100px;width:100px"/>
-<span class="center-block" style="margin-top:50px;text-align:center;font-family:Andalus;font-size:20px">Happy</span>
-</div>
-<div class="col-md-3" style="margin-top:50px">
-<img id="sadEmo" class="center-block" src="static/resources/sadC.jpg"  style="border-radius:100px;height:100px;width:100px"/>
-<span class="center-block" style="margin-top:50px;text-align:center;font-family:Andalus;font-size:20px">Sad</span>
-</div>
-<div class="col-md-3" style="margin-top:50px">
-<img id="normalEmo" class="center-block" src="static/resources/normalC.jpg"  style="border-radius:100px;height:100px;width:100px"/>
-<span class="center-block" style="margin-top:50px;text-align:center;font-family:Andalus;font-size:20px">Normal</span>
-</div>
-<div class="col-md-3" style="margin-top:50px">
-<img id="angryEmo" class="center-block" src="static/resources/angryC.jpg"  style="border-radius:100px;height:100px;width:100px"/>
-<span class="center-block" style="margin-top:50px;text-align:center;font-family:Andalus;font-size:20px">Angry</span>
-</div>
-</div>
+            $(function () {
+              $('[data-toggle="tooltip"]').tooltip()
+            });
 
-
-</div>
-<!--Analysis Label-->
-<div id="analysisLabel" style="position:relative;height:150px;margin:10px;">
-<div style="position:absolute;top:45%;left:40%;font-family:Andalus">ANALYSIS</div>
-<img class="center-block" height=150 width=51 src="static/resources/analysis_label.png" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Analysing Emotions">
-</div>
-<!--Analysis Division-->
-<div id="analysis_div" class="img-rounded">
-<div class="row">
-<div class="col-md-6">
-<canvas id="emotionCanvas" class="container-fluid" style="margin:25px;margin-left:77px" ></canvas>
-</div>
+            $(function () {
+              $('[data-toggle="popover"]').popover()
+            });
 
 
+            //$('#navList li').on('activate.bs.scrollspy', function () {
+            //var href = $(this).children("a").attr("href");
+            //window.location.hash = href;
+            //console.log($(this).children("a")+","+href);
+            //});
 
-<div class="col-md-6">
-<div style="margin:10px;margin-top:30px;font-family:Andalus;">
-<div class="row">
-<div class="col-md-1" >
-<div style="height:20px;width:20px;background-color:#337ab7;border-radius:50px;box-shadow:1px 1px 1px"></div>
-</div>
-<div class="col-md-11">Happy</div>
-
-</div></div>
-
-<div style="margin:10px;font-family:Andalus;">
-<div class="row">
-<div class="col-md-1">
-<div style="height:20px;width:20px;background-color:#FFAB40;border-radius:50px;box-shadow:1px 1px 1px"></div>
-</div>
-<div class="col-md-11">Sad</div></div></div>
-
-<div style="margin:10px;font-family:Andalus;">
-<div class="row">
-<div class="col-md-1">
-<div style="height:20px;width:20px;background-color:#03A9F4;border-radius:50px;box-shadow:1px 1px 1px"></div>
-</div>
-<div class="col-md-11">Normal</div></div></div>
-
-<div style="margin:10px;font-family:Andalus;">
-<div class="row">
-<div class="col-md-1">
-<div style="height:20px;width:20px;background-color:#D32F2F;border-radius:50px;box-shadow:1px 1px 1px"></div>
-</div>
-<div class="col-md-11">Angry</div></div></div>
-</div>
-</div>
-
-<hr style="margin-left:25px;margin-right:25px">
-<div id="happyChart" class="container-fluid" style=" height: 150px;margin-top:30px;margin-bottom:25px"></div>
-<hr style="margin-left:25px;margin-right:25px">
-<div id="sadChart" class="container-fluid" style=" height: 150px;margin-top:30px;margin-bottom:25px"></div>
-<hr style="margin-left:25px;margin-right:25px">
-<div id="normalChart" class="container-fluid" style="height: 150px;margin-top:30px;margin-bottom:25px"></div>
-<hr style="margin-left:25px;margin-right:25px">
-<div id="angryChart" class="container-fluid" style=" height: 150px;margin-top:30px;margin-bottom:25px"></div>
-<hr style="margin-left:25px;margin-right:25px">
-<div id="overallChart" class="container-fluid" style=" height: 150px;margin-top:30px;margin-bottom:25px"></div>
-
-</div>
-<!-- Overall Label-->
-<div id="overallLabel" style="position:relative;height:150px;margin:10px;">
-<div style="position:absolute;top:25%;left:54%;font-family:Andalus">OVERALL EMOTIONS</div>
-<img class="center-block" height=150 width=51 src="static/resources/overall_label.png" data-toggle="popover" data-trigger="hover" data-placement="left" data-content="Showing Results of Emotion Analysis">
-</div>
-<!--Overall Division-->
-<div id="overall_div" class="img-rounded" style="position:relative" >
-<div class="row">
-
-<div class="col-md-3" style="margin-top:25px">
-<canvas class="container-fluid" id="overallHappyCanvas" width="200" height="200" style=""></canvas>
-<span class="center-block" style="text-align:center;font-family:Andalus;font-size:23px">Happy</span>
-
-</div>
-
-<div class="col-md-3" style="margin-top:25px">
-<canvas class="container-fluid" id="overallSadCanvas" width="200" height="200" style=""></canvas>
-<span class="center-block" style="text-align:center;font-family:Andalus;font-size:23px">Sad</span>
-</div>
-
-<div class="col-md-3" style="margin-top:25px">
-<canvas class="container-fluid" id="overallNormalCanvas" width="200" height="200" style=""></canvas>
-<span class="center-block" style="text-align:center;font-family:Andalus;font-size:23px">Normal</span>
-
-</div>
-
-<div class="col-md-3" style="margin-top:25px">
-<canvas class="container-fluid" id="overallAngryCanvas" width="200" height="200" style=""></canvas>
-<span class="center-block" style="text-align:center;font-family:Andalus;font-size:23px">Angry</span>
-    </div>
-	
-	</div>
-</div>
-
-<!--Footer Division-->
-<div id="footer_div" class="img-rounded" style="position:relative" >
-
-</div>
-
-<!-- Analytics Modal -->
-<div id="analyticsModal" class="modal fade" role="dialog">
-  <div class="modal-dialog" role="document">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="font-family:Andalus;font-face:plain">EMOTION ANALYTICS</h4>
-      </div>
-      <div class="modal-body">
-        <table id="dataTable" class="table table-striped" style="">
-
-</table>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-<!--Setting Modal -->
-<div id="settingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog" role="document">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="font-family:Andalus;font-face:plain">SETTINGS</h4>
-      </div>
-      <div class="modal-body" style="margin-top:10px;margin-bottom:30px">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- Network Status Modal-->
-
-<div id="netStatusModal" class="modal fade" role="dialog">
-  <div class="modal-dialog" role="document">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="font-family:Andalus;font-face:plain">STATUS</h4>
-      </div>
-      <div class="modal-body">
-	 <div style="padding-left:10px;padding-top:10px">
-	 <span style="font-family:Andalus">NETWORK STATUS</span></div>
- <div style="padding:10px;margin-left:20px">
- <span style="font-family:Andalus">Network Delay:</span>
- <span id="netDelay" style="margin-left:20px;font-family:Andalus">NA</span></div>
- <hr>
-<div style="padding-left:10px;padding-top:10px">
-<span style="font-family:Andalus">ANALYSIS STATUS</span></div>
- <div style="padding:10px;margin-left:20px">
- <span style="font-family:Andalus">Estimated Analysis Completion Time:</span>
- <span id="estimatedTime" style="margin-left:20px;font-family:Andalus">NA</span></div>
-<div style="padding:10px;margin-left:20px">
-<span style="font-family:Andalus">Time Elapsed:</span>
-<span id="timeSpent" style="margin-left:20px;font-family:Andalus">NA</span></div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- Analysis Warning Modal-->
-
-<div id="warningModal" class="modal fade" role="dialog">
-  <div class="modal-dialog" role="document">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h1 class="modal-title" style="font-size:18px;font-family:Andalus;font-face:plain;color:#d9534f">
-		WARNING</h1>
-      </div>
-      <div class="modal-body">
-	 <div style="font-family:Andalus">Emotion Analysis is in Progress. Wait until completed.</div>
-	<div style="padding-top:10px;padding-bottom:10px"> <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span style="font-family:Andalus"> Reload to Start Analysis</span>
-      </div><div class="modal-footer">
-<!--		<button type="button" class="btn btn-default btn-danger" >Stop Analysis</button>
-    -->    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-<script>
-//show analytics modal
-$(document).ready(function(){
-    $("#analyticsBtn").click(function(){
-        $("#analyticsModal").modal();
-    });
-});
-//show setting modal
-$(document).ready(function(){
-    $("#settingBtn").click(function(){
-        $("#settingModal").modal();
-    });
-});
-//show network status modal
-$(document).ready(function(){
-    $("#netStatusBtn").click(function(){
-        $("#netStatusModal").modal();
-    });
-});
-
-//this is for animating circular progress bar when reached at the bottom of window
-$(window).on('scroll', function() {
-	var $window=$(window);
-    var window_height = $window.height();
-    var window_top_position = $window.scrollTop();
-    var window_bottom_position = (window_top_position + window_height);
-	var $animation_elements=$('#overall_div');
-  $.each($animation_elements, function() {
-    var $element = $(this);
-    var element_height = $element.outerHeight();
-    var element_top_position = $element.offset().top;
-    var element_bottom_position = (element_top_position + element_height);
-
-    //check to see if this current container is within viewport
-    if ((element_top_position >= window_top_position) &&
-        (element_bottom_position+50== window_bottom_position)&&(document.getElementById('stop_btn').style.visibility=="collapse")&&(progressFlag==true)) {
-      //clear canvases
-		ctx3.clearRect(0, 0, overallHappyCanvas.width, overallHappyCanvas.height);
-		ctx4.clearRect(0, 0, overallSadCanvas.width, overallSadCanvas.height);
-		ctx5.clearRect(0, 0, overallNormalCanvas.width, overallNormalCanvas.height);
-		ctx6.clearRect(0, 0, overallAngryCanvas.width, overallAngryCanvas.height);
-		//start animation of circular progress bars
-		circularProgress(overallHappyCanvas,ctx3,Math.round(happySum/sum*100),'#337ab7');
-		circularProgress(overallSadCanvas,ctx4,Math.round(sadSum/sum*100),'#FFAB40');
-		circularProgress(overallNormalCanvas,ctx5,Math.round(normalSum/sum*100),'#03A9F4');
-		circularProgress(overallAngryCanvas,ctx6,Math.round(angrySum/sum*100),'#D32F2F');
-		//console.log("Scroll Event--Element:"+element_bottom_position+"||Window:"+window_bottom_position+"||Hap;"+Math.round(happySum/sum*100));
-		
-    } 
-  });
-});
-
-$(function () {
-$('[data-toggle="tooltip"]').tooltip()
-});
-
-$(function(){
-$('[data-toggle="popover"]').popover()
-});
-
-
-//$('#navList li').on('activate.bs.scrollspy', function () {
-//var href = $(this).children("a").attr("href");
-//window.location.hash = href;
-//console.log($(this).children("a")+","+href);
-//});
-
-</script>
-
-</div>
-</div>
-</div>
-
-</body>
-</html>
+            function closeAlert1() {
+              $("#completionAlert").hide();
+            }</script></div></div></div></div></body></html>
